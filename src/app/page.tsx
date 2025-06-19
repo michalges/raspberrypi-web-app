@@ -1,32 +1,35 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import type { SystemData } from "@/lib/types";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-    const [temp, setTemp] = useState<number | null>(null);
+    const [systemData, setSystemData] = useState<SystemData | null>(null);
 
     useEffect(() => {
-        async function fetchTemp() {
+        async function fetchSystemData() {
             try {
-                const res = await fetch('/api/system-stats');
+                const res = await fetch("/api/system-stats");
                 const data = await res.json();
-                setTemp(data.temperature);
+                setSystemData(data);
             } catch {
-                setTemp(null);
+                setSystemData(null);
             }
         }
 
-        fetchTemp();
-
-        const interval = setInterval(fetchTemp, 1000);
-
+        fetchSystemData();
+        const interval = setInterval(fetchSystemData, 1000);
         return () => clearInterval(interval);
     }, []);
 
     return (
         <main>
             <h1>Raspberry Pi CPU Temperature</h1>
-            {temp !== null ? <p>{temp} °C</p> : <p>Loading...</p>}
+            {systemData ? (
+                <p>{JSON.stringify(systemData, null, 2)}</p>
+            ) : (
+                <p>null? </p>
+            )}
         </main>
     );
 }

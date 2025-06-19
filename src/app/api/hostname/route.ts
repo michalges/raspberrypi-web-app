@@ -6,10 +6,13 @@ export async function GET() {
 
     try {
         try {
-            const output = execSync("hostname -I").toString();
-            console.log("test", output);
-            ip = output.trim().split(" ")[0];
-            const parts = ip.split(".");
+            const output = execSync(
+                "ip -4 -o addr show scope global | awk '{print $4}' | cut -d/ -f1",
+            )
+                .toString()
+                .trim()
+                .split("\n")[0];
+            const parts = output.split(".");
             parts[0] = "xxx";
             parts[1] = "xxx";
             parts[2] = "x";

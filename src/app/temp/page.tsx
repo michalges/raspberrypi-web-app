@@ -24,7 +24,7 @@ export default function Home() {
         }
 
         fetchTempStats();
-        const interval = setInterval(fetchTempStats, 1000);
+        const interval = setInterval(fetchTempStats, 5000);
         return () => clearInterval(interval);
     }, []);
 

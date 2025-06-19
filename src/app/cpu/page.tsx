@@ -30,7 +30,7 @@ export default function Home() {
             <StatCard
                 icon={Cpu}
                 label="CPU usage (total)"
-                value={cpuStats ? +cpuStats.cpu_load : 0}
+                value={cpuStats ? +cpuStats.cpuLoad : 0}
                 unit="%"
             />
             <div className="flex h-full w-full flex-col rounded-md border p-2 shadow-sm lg:h-min lg:w-min">

@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Raspberry Pi Stats",
+    title: "Raspberry Pi",
     description: "",
 };
 

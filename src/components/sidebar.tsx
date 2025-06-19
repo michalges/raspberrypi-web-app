@@ -23,6 +23,13 @@ export function Sidebar() {
             >
                 <Link href="/cpu">CPU</Link>
             </Button>
+            <Button
+                asChild
+                className="w-full justify-start"
+                variant={pathname === "/temp" ? "secondary" : "ghost"}
+            >
+                <Link href="/temp">Temperature</Link>
+            </Button>
         </div>
     );
 }

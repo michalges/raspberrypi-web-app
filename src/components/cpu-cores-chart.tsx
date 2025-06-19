@@ -13,8 +13,8 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function CpuCoresChart({ stats, className }: { stats: CpuStats; className?: string }) {
-    const chartData = stats.cpu_cores.map((core) => ({
-        core: `Core ${core.core_id}`,
+    const chartData = stats.cpuCores.map((core) => ({
+        core: `Core ${core.coreId}`,
         usage: core.usage,
     }));
 

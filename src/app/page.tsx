@@ -56,7 +56,7 @@ export default function Home() {
                     <StatCard
                         icon={Cpu}
                         label="CPU usage"
-                        value={systemStats ? +systemStats.cpu_load.toFixed(2) : 0}
+                        value={systemStats ? +systemStats.cpuLoad.toFixed(2) : 0}
                         unit="%"
                     />
                     <StatCard
@@ -68,15 +68,15 @@ export default function Home() {
                     <StatCard
                         icon={MemoryStick}
                         label="RAM"
-                        value={systemStats ? +systemStats.ram_used.toFixed(2) : 0}
-                        maxValue={systemStats ? +systemStats.ram_total.toFixed(2) : 0}
+                        value={systemStats ? +systemStats.ramUsed.toFixed(2) : 0}
+                        maxValue={systemStats ? +systemStats.ramTotal.toFixed(2) : 0}
                         unit=" MB"
                     />
                     <StatCard
                         icon={HardDrive}
                         label="Storage"
-                        value={systemStats ? +systemStats.storage_used.toFixed(2) : 0}
-                        maxValue={systemStats ? +systemStats.storage_total.toFixed(2) : 0}
+                        value={systemStats ? +systemStats.storageUsed.toFixed(2) : 0}
+                        maxValue={systemStats ? +systemStats.storageTotal.toFixed(2) : 0}
                         unit=" GB"
                     />
                 </div>

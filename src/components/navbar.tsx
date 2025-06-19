@@ -12,7 +12,7 @@ export function Navbar() {
                     src={"/logo.png"}
                     className="h-6 w-6"
                 ></Image>
-                <h1 className="text-xl font-semibold">Raspberry Pi Stats</h1>
+                <h1 className="text-xl font-semibold">Raspberry Pi</h1>
             </div>
             <ThemeSelect></ThemeSelect>
         </nav>

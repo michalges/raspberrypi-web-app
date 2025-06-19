@@ -1,16 +1,34 @@
 export interface SystemStats {
-    cpu_load: number;
+    cpuLoad: number;
     temperature: number;
-    ram_used: number;
-    ram_total: number;
-    storage_used: number;
-    storage_total: number;
+    ramUsed: number;
+    ramTotal: number;
+    storageUsed: number;
+    storageTotal: number;
 }
 
 export interface CpuStats {
-    cpu_load: number;
-    cpu_cores: {
-        core_id: number;
+    cpuLoad: number;
+    cpuCores: {
+        coreId: number;
         usage: number;
     }[];
+    time: number;
+}
+
+export interface TempStats {
+    temperature: number;
+    time: number;
+}
+
+export interface RamStats {
+    ramUsed: number;
+    ramTotal: number;
+    time: number;
+}
+
+export interface StorageStats {
+    storageUsed: number;
+    storageTotal: number;
+    time: number;
 }

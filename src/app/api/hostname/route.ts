@@ -9,6 +9,11 @@ export async function GET() {
             const output = execSync("hostname -I").toString();
             console.log("test", output);
             ip = output.trim().split(" ")[0];
+            const parts = ip.split(".");
+            parts[0] = "xxx";
+            parts[1] = "xxx";
+            parts[2] = "x";
+            ip = parts.join(".");
         } catch (error) {
             console.warn("Failed to get hostname");
         }

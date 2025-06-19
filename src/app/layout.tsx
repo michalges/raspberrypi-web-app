@@ -1,8 +1,9 @@
+import "./globals.css";
+import { Providers } from "./theme-provider";
+import { Navbar } from "@/components/navbar";
+import { Sidebar } from "@/components/sidebar";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { Navbar } from "@/components/navbar";
-import { Providers } from "./theme-provider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Raspberry Pi",
+    title: "Raspberry Pi Stats",
     description: "",
 };
 
@@ -28,8 +29,13 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <Providers>
-                    <Navbar />
-                    {children}
+                    <div className="flex h-screen w-full flex-col">
+                        <Navbar />
+                        <div className="flex flex-grow flex-row">
+                            <Sidebar />
+                            <div className="flex flex-1 flex-col">{children}</div>
+                        </div>
+                    </div>
                 </Providers>
             </body>
         </html>

@@ -27,8 +27,8 @@ export function getCpuStats(): CpuStats {
             stats.cpu_cores.length > 0
                 ? parseFloat((totalUsage / stats.cpu_cores.length).toFixed(2))
                 : 0;
-    } catch (err) {
-        console.warn("Failed to get CPU stats:", err);
+    } catch (error) {
+        console.warn("Failed to get CPU stats");
     }
 
     return stats;

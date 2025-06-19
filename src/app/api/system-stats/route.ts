@@ -20,7 +20,7 @@ export async function GET() {
             const tempRaw = execSync("cat /sys/class/thermal/thermal_zone0/temp").toString().trim();
             stats.temperature = parseInt(tempRaw, 10) / 1000;
         } catch (error) {
-            console.warn("Failed to get temperature:", error);
+            console.warn("Failed to get temperature");
         }
 
         try {
@@ -32,7 +32,7 @@ export async function GET() {
             stats.ram_used = Math.round((total - available) / 1024);
             stats.ram_total = Math.round(total / 1024);
         } catch (error) {
-            console.warn("Failed to get RAM info:", error);
+            console.warn("Failed to get RAM info");
         }
 
         try {
@@ -44,7 +44,7 @@ export async function GET() {
             stats.storage_used = parseFloat((used / 1024 / 1024).toFixed(2));
             stats.storage_total = parseInt((total / 1024 / 1024).toFixed(0));
         } catch (error) {
-            console.warn("Failed to get storage info:", error);
+            console.warn("Failed to get storage info");
         }
 
         return NextResponse.json(stats);

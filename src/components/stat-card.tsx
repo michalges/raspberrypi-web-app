@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./ui/card";
 import { Progress } from "./ui/progress";
 import type { LucideIcon } from "lucide-react";
 
@@ -20,16 +20,17 @@ export function StatCard({
     const Icon = icon;
 
     return (
-        <Card className="w-96">
-            <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="flex flex-row items-center gap-x-1">
+        <Card className="w-full lg:w-96">
+            <CardHeader className="flex flex-col">
+                <CardTitle className="flex flex-row items-center gap-x-2">
                     <Icon className="w-4" />
                     {label}
                 </CardTitle>
-                <CardDescription>
-                    <span>{valueString}</span>
+                <CardDescription className="py-2">
+                    <span className="text-2xl">{valueString}</span>
                 </CardDescription>
             </CardHeader>
+            {/* <div className="flex-grow"></div> */}
             <CardContent>
                 <Progress value={progressValue} />
             </CardContent>

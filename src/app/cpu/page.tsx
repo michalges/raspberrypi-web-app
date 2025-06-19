@@ -2,9 +2,8 @@
 
 import { CpuCoresChart } from "@/components/cpu-cores-chart";
 import { StatCard } from "@/components/stat-card";
-import { Progress } from "@/components/ui/progress";
 import type { CpuStats } from "@/lib/types";
-import { Cpu, HardDrive, MemoryStick, Thermometer, type LucideIcon } from "lucide-react";
+import { Cpu } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -34,9 +33,9 @@ export default function Home() {
                 value={cpuStats ? +cpuStats.cpu_load : 0}
                 unit="%"
             />
-            <div className="flex w-full flex-grow flex-col rounded-md border p-2 shadow-sm">
+            <div className="flex h-full w-full flex-col rounded-md border p-2 shadow-sm lg:h-min lg:w-min">
                 <h3 className="mb-4 p-4 text-xl font-semibold">CPU Cores</h3>
-                <div className="h-[500px] w-[1000px]">
+                <div className="h-full w-full lg:h-[300px] lg:w-[750px]">
                     {cpuStats ? <CpuCoresChart stats={cpuStats} /> : <span>loading</span>}
                 </div>
             </div>

@@ -34,8 +34,11 @@ export default function Home() {
                 value={cpuStats ? +cpuStats.cpu_load : 0}
                 unit="%"
             />
-            <div className="w-[1000px] flex-grow rounded-md border p-2 shadow-sm">
-                {cpuStats ? <CpuCoresChart stats={cpuStats} /> : <span>loading</span>}
+            <div className="flex w-full flex-grow flex-col rounded-md border p-2 shadow-sm">
+                <h3 className="mb-4 p-4 text-xl font-semibold">CPU Cores</h3>
+                <div className="h-[500px] w-[1000px]">
+                    {cpuStats ? <CpuCoresChart stats={cpuStats} /> : <span>loading</span>}
+                </div>
             </div>
         </div>
     );

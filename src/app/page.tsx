@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Progress } from "@/components/ui/progress";
 import {
     Card,
@@ -34,9 +35,18 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="flex h-full w-full justify-center p-2">
-            <div className="mt-8 w-96 space-y-4 md:mt-32">
-                <h1 className="w-full text-center text-2xl font-semibold">Raspberry Pi</h1>
+        <div className="flex h-full w-full justify-center">
+            <div className="w-96 space-y-4 p-2 md:mt-32">
+                <div className="flex w-full flex-row items-center justify-center space-x-2 py-4">
+                    <Image
+                        width={64}
+                        height={64}
+                        alt={"logo"}
+                        src={"/logo.png"}
+                        className="h-10 w-10"
+                    ></Image>
+                    <h1 className="text-3xl font-semibold">Raspberry Pi</h1>
+                </div>
                 <div className="space-y-2">
                     <StatsListItem
                         label="CPU usage"

@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Providers } from "./theme-provider";
+import { AppThemeProvider } from "./theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 import { SidebarProvider } from "@/contexts/sidebar-context";
@@ -25,17 +25,19 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <Providers>
+                <AppThemeProvider>
                     <SidebarProvider>
                         <div className="flex h-screen w-full flex-col">
                             <Navbar />
-                            <div className="relative flex flex-grow flex-row">
+                            <div className="relative flex flex-grow flex-row overflow-hidden">
                                 <Sidebar />
-                                <div className="flex flex-1 flex-col">{children}</div>
+                                <div className="flex flex-1 flex-col overflow-y-auto">
+                                    {children}
+                                </div>
                             </div>
                         </div>
                     </SidebarProvider>
-                </Providers>
+                </AppThemeProvider>
             </body>
         </html>
     );

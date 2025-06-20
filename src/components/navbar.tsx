@@ -2,26 +2,24 @@
 
 import { ThemeSelect } from "./theme-select";
 import { Button } from "./ui/button";
+import Logo from "@/../public/logo.png";
 import { useSidebarContext } from "@/contexts/sidebar-context";
 import { Menu } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Navbar() {
     const { toggle } = useSidebarContext();
     return (
-        <nav className="flex w-full flex-row justify-between border-b p-2 lg:p-4">
-            <div className="flex flex-row items-center justify-center space-x-1.5">
-                <Image
-                    width={64}
-                    height={64}
-                    alt={"logo"}
-                    src={"/logo.png"}
-                    className="h-6 w-6"
-                ></Image>
-                <h1 className="text-xl font-semibold">Raspberry Pi</h1>
-            </div>
+        <nav className="flex w-full flex-row justify-between border-b p-4">
+            <Link href="/" passHref>
+                <div className="flex flex-row items-center space-x-1.5">
+                    <Image src={Logo} alt={"Raspberrypi logo"} className="h-6 w-6" />
+                    <h1 className="text-xl font-semibold">Raspberry Pi</h1>
+                </div>
+            </Link>
 
-            <div className="space-x-2 lg:space-x-4">
+            <div className="space-x-4">
                 <ThemeSelect></ThemeSelect>
                 <Button variant="outline" size="icon" onClick={toggle}>
                     <Menu className="h-2 w-2" />

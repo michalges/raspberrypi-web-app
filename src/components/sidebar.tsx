@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export function Sidebar() {
-    const { isOpen } = useSidebarContext();
+    const { isOpen, toggle } = useSidebarContext();
     const pathname = usePathname();
 
     return (
@@ -17,27 +17,41 @@ export function Sidebar() {
                     : "-translate-x-full px-0 lg:w-0 lg:opacity-100"
             }`}
         >
-            <Button
-                asChild
-                className="w-full justify-start"
-                variant={pathname === "/" ? "secondary" : "ghost"}
-            >
-                <Link href="/">Dashboard</Link>
-            </Button>
-            <Button
-                asChild
-                className="w-full justify-start"
-                variant={pathname === "/cpu" ? "secondary" : "ghost"}
-            >
-                <Link href="/cpu">CPU</Link>
-            </Button>
-            <Button
-                asChild
-                className="w-full justify-start"
-                variant={pathname === "/temp" ? "secondary" : "ghost"}
-            >
-                <Link href="/temp">Temperature</Link>
-            </Button>
+            <SidebarButton label="Dashboard" pathname={pathname} currentPath="/" toggle={toggle} />
+            <SidebarButton label="CPU" pathname={pathname} currentPath="/cpu" toggle={toggle} />
+            <SidebarButton
+                label="Temperature"
+                pathname={pathname}
+                currentPath="/temp"
+                toggle={toggle}
+            />
         </aside>
+    );
+}
+
+function SidebarButton({
+    label,
+    pathname,
+    currentPath,
+    toggle,
+}: {
+    label: string;
+    pathname: string;
+    currentPath: string;
+    toggle: () => void;
+}) {
+    return (
+        <Button
+            asChild
+            className="w-full justify-start"
+            variant={pathname === currentPath ? "secondary" : "ghost"}
+            onClick={() => {
+                if (window.innerWidth < 1024) {
+                    toggle();
+                }
+            }}
+        >
+            <Link href={currentPath}>{label}</Link>
+        </Button>
     );
 }

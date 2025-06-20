@@ -6,7 +6,7 @@ import { Cpu, HardDrive, MemoryStick, Thermometer } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-    const [hostname, setHostname] = useState<string | null>(null);
+    const [deviceTreeModel, setDeviceTreeModel] = useState<string | null>(null);
     const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
 
     useEffect(() => {
@@ -26,17 +26,17 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        async function fetchHostname() {
+        async function fetchDeviceTreeModel() {
             try {
-                const res = await fetch("/api/hostname");
+                const res = await fetch("/api/device-tree-model");
                 const data = await res.json();
-                setHostname(data.hostname ?? null);
+                setDeviceTreeModel(data.model ?? null);
             } catch {
-                setHostname(null);
+                setDeviceTreeModel(null);
             }
         }
 
-        fetchHostname();
+        fetchDeviceTreeModel();
     }, []);
 
     return (
@@ -44,10 +44,12 @@ export default function Home() {
             <div className="mt-12 w-full space-y-18 p-4 lg:-mt-32 lg:w-auto">
                 <div className="flex flex-col space-y-2">
                     <span className="text-muted-foreground text-xs">
-                        {hostname ? "Pomyślnie nawiązano połączenie" : "IP nieznane"}
+                        {deviceTreeModel
+                            ? "Pomyślnie nawiązano połączenie"
+                            : "Nie udało się odczytać modelu urządzenia"}
                     </span>
-                    <h2 className="text-4xl font-semibold lg:text-6xl">
-                        {hostname ? hostname : "xxx.xxx.x.xxx"}
+                    <h2 className="text-3xl font-semibold lg:text-6xl">
+                        {deviceTreeModel ? deviceTreeModel : "Nieznany model"}
                     </h2>
                 </div>
 

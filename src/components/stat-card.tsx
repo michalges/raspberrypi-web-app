@@ -16,7 +16,6 @@ export function StatCard({
     unit?: string;
 }) {
     const progressValue = maxValue ? (value / maxValue) * 100 : value;
-    const valueString = maxValue ? `${value}${unit} / ${maxValue}${unit}` : `${value}${unit}`;
     const Icon = icon;
 
     return (
@@ -27,10 +26,19 @@ export function StatCard({
                     {label}
                 </CardTitle>
                 <CardDescription className="py-2">
-                    <span className="text-2xl">{valueString}</span>
+                    <span className="text-2xl">
+                        {value}
+                        {unit}
+                    </span>
+                    {maxValue && (
+                        <span className="text-muted-foreground/50 text-sm">
+                            {" / "}
+                            {maxValue}
+                            {unit}
+                        </span>
+                    )}
                 </CardDescription>
             </CardHeader>
-            {/* <div className="flex-grow"></div> */}
             <CardContent>
                 <Progress value={progressValue} />
             </CardContent>

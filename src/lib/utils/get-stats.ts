@@ -1,5 +1,6 @@
 import type { CpuStats, RamStats, StorageStats, TempStats } from "@/lib/types";
 import { execSync } from "child_process";
+import { stat } from "fs";
 
 export function getCpuStats(): CpuStats {
     const stats: CpuStats = {

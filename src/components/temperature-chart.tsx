@@ -18,6 +18,17 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
+function movingAverage(data: number[], windowSize: number) {
+    const averages = [];
+    for (let i = 0; i < data.length; i++) {
+        const start = Math.max(0, i - windowSize + 1);
+        const windowData = data.slice(start, i + 1);
+        const avg = windowData.reduce((sum, val) => sum + val, 0) / windowData.length;
+        averages.push(avg);
+    }
+    return averages;
+}
+
 export function TemperatureChart({
     data,
     className,
@@ -25,15 +36,18 @@ export function TemperatureChart({
     data: { time: number; temperature: number }[];
     className?: string;
 }) {
-    const chartData = data.map((d) => ({
+    const temperatures = data.map((d) => d.temperature);
+    const maTemperatures = movingAverage(temperatures, 5);
+
+    const chartData = data.map((d, i) => ({
         time: new Date(d.time * 1000).toLocaleTimeString(),
-        temperature: +d.temperature.toFixed(2),
+        temperature: +maTemperatures[i].toFixed(2),
     }));
 
     return (
         <ChartContainer
             config={chartConfig}
-            className={`h-full w-full ${className ? ` ${className}` : ""}`}
+            className={`h-full w-full${className ? ` ${className}` : ""}`}
         >
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData}>

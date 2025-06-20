@@ -6,6 +6,6 @@ export async function GET() {
         const stats = getCpuStats();
         return NextResponse.json(stats);
     } catch {
-        return NextResponse.json({ error: "Failed to read system metrics" }, { status: 500 });
+        return NextResponse.json({ error: "Failed to read cpu stats" }, { status: 500 });
     }
 }

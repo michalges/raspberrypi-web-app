@@ -30,7 +30,7 @@ export default function Home() {
             try {
                 const res = await fetch("/api/hostname");
                 const data = await res.json();
-                setHostname(data);
+                setHostname(data.hostname ?? null);
             } catch {
                 setHostname(null);
             }
@@ -40,18 +40,17 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="flex h-full w-full flex-col items-center justify-center space-y-2 p-2">
-            <div className="w-full space-y-18 p-4 lg:-mt-32 lg:w-auto">
-                {hostname ? (
-                    <div className="flex flex-col space-y-2">
-                        <span className="text-muted-foreground text-sm">
-                            Pomyślnie nawiązano połączenie
-                        </span>
-                        <h2 className="text-2xl font-semibold lg:text-6xl">{hostname}</h2>
-                    </div>
-                ) : (
-                    <span className="text-muted-foreground text-sm">IP nieznane</span>
-                )}
+        <div className="flex h-full w-full flex-col space-y-2 p-2 lg:items-center lg:justify-center">
+            <div className="mt-12 w-full space-y-18 p-4 lg:-mt-32 lg:w-auto">
+                <div className="flex flex-col space-y-2">
+                    <span className="text-muted-foreground text-xs">
+                        {hostname ? "Pomyślnie nawiązano połączenie" : "IP nieznane"}
+                    </span>
+                    <h2 className="text-4xl font-semibold lg:text-6xl">
+                        {hostname ? hostname : "xxx.xxx.x.xxx"}
+                    </h2>
+                </div>
+
                 <div className="grid w-full grid-cols-1 gap-4 lg:w-max lg:grid-cols-2">
                     <StatCard
                         icon={Cpu}

@@ -6,6 +6,6 @@ export async function GET() {
         const stats = getTempStats();
         return NextResponse.json(stats);
     } catch {
-        return NextResponse.json({ error: "Failed to read system metrics" }, { status: 500 });
+        return NextResponse.json({ error: "Failed to read temp stats" }, { status: 500 });
     }
 }

@@ -11,7 +11,7 @@ import Link from "next/link";
 export function Navbar() {
     const { toggle } = useSidebarContext();
     return (
-        <nav className="flex w-full flex-row justify-between border-b p-4">
+        <nav className="z-50 flex w-full flex-row justify-between border-b p-4">
             <Link href="/" passHref>
                 <div className="flex flex-row items-center space-x-1.5">
                     <Image src={Logo} alt={"Raspberrypi logo"} className="h-6 w-6" />

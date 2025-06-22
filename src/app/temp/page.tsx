@@ -1,47 +1,61 @@
 "use client";
 
+import { Chart } from "@/components/chart";
 import { StatCard } from "@/components/stat-card";
-import { TemperatureChart } from "@/components/temperature-chart";
-import type { TempStats } from "@/lib/types";
+import { API_URL } from "@/lib/constants";
+import type { ChartData, TempStats } from "@/lib/types";
 import { Thermometer } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-    const [tempHistory, setTempHistory] = useState<TempStats[]>([]);
+export default function Page() {
+    const [tempStats, setTempStats] = useState<TempStats[] | null>(null);
 
     useEffect(() => {
         async function fetchTempStats() {
             try {
-                const res = await fetch("/api/temp-stats");
-                const data: TempStats = await res.json();
-                setTempHistory((prev) => {
-                    const updated = [...prev, data];
-                    return updated.length > 100 ? updated.slice(-100) : updated;
-                });
+                const res = await fetch(`${API_URL}/temp/history`);
+                const data = await res.json();
+                const mappedData: TempStats[] = data.map(
+                    (item: { timestamp: string; temp: number }) => ({
+                        timestamp: item.timestamp,
+                        tempUsage: item.temp,
+                    }),
+                );
+                setTempStats(mappedData);
             } catch {
-                console.warn("Failed to fetch temperature stats");
+                setTempStats(null);
             }
         }
 
         fetchTempStats();
-        const interval = setInterval(fetchTempStats, 5000);
+        const interval = setInterval(fetchTempStats, 3000);
         return () => clearInterval(interval);
     }, []);
 
-    const latest = tempHistory.at(-1);
+    const chartData: ChartData[] =
+        tempStats?.map((dataPoint) => ({
+            timestamp: dataPoint.timestamp,
+            value: dataPoint.temp,
+        })) || [];
 
     return (
         <div className="flex h-full w-full flex-col space-y-2 p-2">
             <StatCard
                 icon={Thermometer}
                 label="Temperature (current)"
-                value={latest ? +latest.temperature.toFixed(2) : 0}
-                unit="°C"
+                value={tempStats && tempStats.length > 0 ? tempStats[tempStats.length - 1].temp : 0}
+                unit="%"
             />
             <div className="flex h-full w-full flex-col rounded-md border p-2 shadow-sm lg:h-min lg:w-min">
-                <h3 className="mb-4 p-4 text-xl font-semibold">Temperature</h3>
+                <h3 className="mb-4 p-4 text-xl font-semibold">Temperature history</h3>
                 <div className="h-full w-full lg:h-[300px] lg:w-[750px]">
-                    <TemperatureChart data={tempHistory} />
+                    {chartData && chartData.length > 0 ? (
+                        <Chart data={chartData} />
+                    ) : (
+                        <p className="text-muted-foreground/50 h-full w-full text-center">
+                            No data available
+                        </p>
+                    )}
                 </div>
             </div>
         </div>

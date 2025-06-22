@@ -1,5 +1,5 @@
 export interface SystemStats {
-    cpuLoad: number;
+    cpuUsage: number;
     temperature: number;
     ramUsed: number;
     ramTotal: number;
@@ -8,27 +8,39 @@ export interface SystemStats {
 }
 
 export interface CpuStats {
-    cpuLoad: number;
-    cpuCores: {
-        coreId: number;
-        usage: number;
-    }[];
-    time: number;
+    timestamp: number;
+    cpuUsage: number;
 }
 
 export interface TempStats {
-    temperature: number;
-    time: number;
+    timestamp: number;
+    temp: number;
 }
 
 export interface RamStats {
-    ramUsed: number;
+    timestamp: number;
+    ramUsage: number;
     ramTotal: number;
-    time: number;
+    ramAvailable: number;
+    ramPercentUsed: number;
+    ramUnit: string;
 }
 
 export interface StorageStats {
+    timestamp: number;
     storageUsed: number;
     storageTotal: number;
-    time: number;
+    storageAvailable: number;
+    storagePercentUsed: number;
+    storageUnit: string;
+}
+
+export interface DeviceInfo {
+    revision: string | null;
+    model: string;
+}
+
+export interface ChartData {
+    timestamp: number;
+    value: number;
 }

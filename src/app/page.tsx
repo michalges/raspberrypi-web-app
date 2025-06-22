@@ -1,42 +1,68 @@
 "use client";
 
 import { StatCard } from "@/components/stat-card";
+import { API_URL } from "@/lib/constants";
 import type { SystemStats } from "@/lib/types";
 import { Cpu, HardDrive, MemoryStick, Thermometer } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-    const [deviceTreeModel, setDeviceTreeModel] = useState<string | null>(null);
+export interface DeviceInfo {
+    revision: string | null;
+    model: string;
+}
+
+export default function Page() {
+    const [deviceInfo, setDeviceInfo] = useState<DeviceInfo | null>(null);
     const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
 
     useEffect(() => {
         async function fetchSystemStats() {
             try {
-                const res = await fetch("/api/system-stats");
-                const data = await res.json();
-                setSystemStats(data);
+                const [cpuRes, tempRes, ramRes, storageRes] = await Promise.all([
+                    fetch(`${API_URL}/cpu`),
+                    fetch(`${API_URL}/temp`),
+                    fetch(`${API_URL}/ram`),
+                    fetch(`${API_URL}/storage`),
+                ]);
+                const [cpuData, tempData, ramData, storageData] = await Promise.all([
+                    cpuRes.json(),
+                    tempRes.json(),
+                    ramRes.json(),
+                    storageRes.json(),
+                ]);
+                setSystemStats({
+                    cpuUsage: cpuData.cpu_usage ?? 0,
+                    temperature: tempData.temperature ?? 0,
+                    ramUsed: ramData.ram_used ?? 0,
+                    ramTotal: ramData.ram_total ?? 0,
+                    storageUsed: storageData.storage_used ?? 0,
+                    storageTotal: storageData.storage_total ?? 0,
+                });
             } catch {
                 setSystemStats(null);
             }
         }
 
         fetchSystemStats();
-        const interval = setInterval(fetchSystemStats, 3000);
+        const interval = setInterval(fetchSystemStats, 5000);
         return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
-        async function fetchDeviceTreeModel() {
+        async function fetchDeviceInfo() {
             try {
-                const res = await fetch("/api/device-tree-model");
+                const res = await fetch(`${API_URL}/device`);
                 const data = await res.json();
-                setDeviceTreeModel(data.model ?? null);
+                setDeviceInfo({
+                    revision: data.revision ?? null,
+                    model: data.model ?? "Nieznany model",
+                });
             } catch {
-                setDeviceTreeModel(null);
+                setDeviceInfo(null);
             }
         }
 
-        fetchDeviceTreeModel();
+        fetchDeviceInfo();
     }, []);
 
     return (
@@ -44,12 +70,12 @@ export default function Home() {
             <div className="mt-12 w-full space-y-18 p-4 lg:-mt-32 lg:w-auto">
                 <div className="flex flex-col space-y-2">
                     <span className="text-muted-foreground text-xs">
-                        {deviceTreeModel
-                            ? "Pomyślnie nawiązano połączenie"
-                            : "Nie udało się odczytać modelu urządzenia"}
+                        {deviceInfo?.revision
+                            ? "Successfully connected"
+                            : "Unknown or unsupported model / no successful connection"}
                     </span>
                     <h2 className="text-3xl font-semibold lg:text-6xl">
-                        {deviceTreeModel ? deviceTreeModel : "Nieznany model"}
+                        {deviceInfo?.model ?? "Unknown model"}
                     </h2>
                 </div>
 
@@ -57,7 +83,7 @@ export default function Home() {
                     <StatCard
                         icon={Cpu}
                         label="CPU usage"
-                        value={systemStats ? +systemStats.cpuLoad.toFixed(2) : 0}
+                        value={systemStats ? +systemStats.cpuUsage.toFixed(2) : 0}
                         unit="%"
                     />
                     <StatCard

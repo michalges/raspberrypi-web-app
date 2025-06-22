@@ -58,6 +58,13 @@ export function Sidebar() {
                     currentPath="/temp"
                     toggle={toggle}
                 />
+                <SidebarButton label="Ram" pathname={pathname} currentPath="/ram" toggle={toggle} />
+                <SidebarButton
+                    label="Storage"
+                    pathname={pathname}
+                    currentPath="/storage"
+                    toggle={toggle}
+                />
             </aside>
         </>
     );

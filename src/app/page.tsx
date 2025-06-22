@@ -1,7 +1,7 @@
 "use client";
 
 import { StatCard } from "@/components/stat-card";
-import { API_URL } from "@/lib/constants";
+import { API_URL, FETCH_INTERVAL } from "@/lib/constants";
 import type { SystemStats } from "@/lib/types";
 import { Cpu, HardDrive, MemoryStick, Thermometer } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -44,7 +44,7 @@ export default function Page() {
         }
 
         fetchSystemStats();
-        const interval = setInterval(fetchSystemStats, 5000);
+        const interval = setInterval(fetchSystemStats, FETCH_INTERVAL);
         return () => clearInterval(interval);
     }, []);
 

@@ -27,14 +27,12 @@ export function StatCard({
                 </CardTitle>
                 <CardDescription className="py-2">
                     <span className="text-2xl">
-                        {value}
-                        {unit}
+                        {value} {unit}
                     </span>
                     {maxValue && (
                         <span className="text-muted-foreground/50 text-sm">
                             {" / "}
-                            {maxValue}
-                            {unit}
+                            {maxValue} {unit}
                         </span>
                     )}
                 </CardDescription>

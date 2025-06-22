@@ -2,7 +2,7 @@
 
 import { Chart } from "@/components/chart";
 import { StatCard } from "@/components/stat-card";
-import { API_URL } from "@/lib/constants";
+import { API_URL, FETCH_INTERVAL } from "@/lib/constants";
 import type { ChartData, CpuStats } from "@/lib/types";
 import { Cpu } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ export default function Page() {
         }
 
         fetchCpuStats();
-        const interval = setInterval(fetchCpuStats, 3000);
+        const interval = setInterval(fetchCpuStats, FETCH_INTERVAL);
         return () => clearInterval(interval);
     }, []);
 
@@ -39,22 +39,24 @@ export default function Page() {
         })) || [];
 
     return (
-        <div className="flex h-full w-full flex-col space-y-2 p-2">
+        <div className="flex h-full w-full flex-col space-y-2 overflow-hidden p-2">
             <StatCard
                 icon={Cpu}
                 label="CPU usage (total)"
                 value={cpuStats ? cpuStats[cpuStats.length - 1].cpuUsage : 0}
                 unit="%"
             />
-            <div className="flex h-full w-full flex-col rounded-md border p-2 shadow-sm lg:h-min lg:w-min">
-                <h3 className="mb-4 p-4 text-xl font-semibold">CPU usage history</h3>
-                <div className="h-full w-full lg:h-[300px] lg:w-[750px]">
+            <div className="flex w-full flex-1 flex-col overflow-hidden rounded-md border shadow-sm">
+                <h3 className="flex-shrink-0 p-4 text-xl font-semibold">CPU usage history</h3>
+                <div className="min-h-0 w-full flex-1 p-2">
                     {chartData && chartData.length > 0 ? (
                         <Chart data={chartData} />
                     ) : (
-                        <p className="text-muted-foreground/50 h-full w-full text-center">
-                            No data available
-                        </p>
+                        <div className="flex h-full w-full items-center justify-center">
+                            <p className="text-muted-foreground/50 text-center">
+                                No data available
+                            </p>
+                        </div>
                     )}
                 </div>
             </div>

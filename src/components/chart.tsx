@@ -19,7 +19,17 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-export function Chart({ data, className }: { data: ChartData[]; className?: string }) {
+export function Chart({
+    data,
+    minValue = 0,
+    maxValue = 100,
+    className,
+}: {
+    data: ChartData[];
+    minValue?: number;
+    maxValue?: number;
+    className?: string;
+}) {
     const chartData = data.map((dataPoint) => ({
         time: new Date(dataPoint.timestamp * 1000).toLocaleTimeString(),
         value: dataPoint.value,
@@ -34,7 +44,7 @@ export function Chart({ data, className }: { data: ChartData[]; className?: stri
                 <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="time" />
-                    <YAxis domain={[0, 100]} />
+                    <YAxis domain={[minValue, maxValue]} />
                     <Tooltip />
                     <Line
                         type="monotone"

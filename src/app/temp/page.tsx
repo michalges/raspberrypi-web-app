@@ -18,7 +18,7 @@ export default function Page() {
                 const mappedData: TempStats[] = data.map(
                     (item: { timestamp: string; temp: number }) => ({
                         timestamp: item.timestamp,
-                        tempUsage: item.temp,
+                        temp: item.temp,
                     }),
                 );
                 setTempStats(mappedData);

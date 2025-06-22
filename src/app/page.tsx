@@ -32,7 +32,7 @@ export default function Page() {
                 ]);
                 setSystemStats({
                     cpuUsage: cpuData.cpu_usage ?? 0,
-                    temperature: tempData.temperature ?? 0,
+                    temperature: tempData.temp ?? 0,
                     ramUsed: ramData.ram_used ?? 0,
                     ramTotal: ramData.ram_total ?? 0,
                     storageUsed: storageData.storage_used ?? 0,
@@ -74,7 +74,7 @@ export default function Page() {
                             ? "Successfully connected"
                             : "Unknown or unsupported model / no successful connection"}
                     </span>
-                    <h2 className="text-3xl font-semibold lg:text-6xl">
+                    <h2 className="text-3xl font-semibold lg:text-5xl">
                         {deviceInfo?.model ?? "Unknown model"}
                     </h2>
                 </div>
@@ -103,7 +103,7 @@ export default function Page() {
                         href="/ram"
                         value={systemStats ? +systemStats.ramUsed.toFixed(2) : 0}
                         maxValue={systemStats ? +systemStats.ramTotal.toFixed(2) : 0}
-                        unit=" MB"
+                        unit="MB"
                     />
                     <StatCard
                         className="lg:order-4"
@@ -112,7 +112,7 @@ export default function Page() {
                         href="/storage"
                         value={systemStats ? +systemStats.storageUsed.toFixed(2) : 0}
                         maxValue={systemStats ? +systemStats.storageTotal.toFixed(2) : 0}
-                        unit=" GB"
+                        unit="GB"
                     />
                 </div>
             </div>

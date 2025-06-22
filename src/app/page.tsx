@@ -67,7 +67,7 @@ export default function Page() {
 
     return (
         <div className="flex h-full w-full flex-col space-y-2 p-2 lg:items-center lg:justify-center">
-            <div className="mt-12 w-full space-y-18 p-4 lg:-mt-32 lg:w-auto">
+            <div className="mt-12 w-full space-y-18 p-4 pb-12 lg:-mt-32 lg:w-auto lg:pb-4">
                 <div className="flex flex-col space-y-2">
                     <span className="text-muted-foreground text-xs">
                         {deviceInfo?.revision
@@ -81,27 +81,35 @@ export default function Page() {
 
                 <div className="grid w-full grid-cols-1 gap-4 lg:w-max lg:grid-cols-2">
                     <StatCard
+                        className="lg:order-1"
                         icon={Cpu}
                         label="CPU usage"
+                        href="/cpu"
                         value={systemStats ? +systemStats.cpuUsage.toFixed(2) : 0}
                         unit="%"
                     />
                     <StatCard
+                        className="lg:order-3"
                         icon={Thermometer}
                         label="Temperature"
+                        href="/temp"
                         value={systemStats ? +systemStats.temperature.toFixed(2) : 0}
                         unit="°C"
                     />
                     <StatCard
+                        className="lg:order-2"
                         icon={MemoryStick}
                         label="RAM"
+                        href="/ram"
                         value={systemStats ? +systemStats.ramUsed.toFixed(2) : 0}
                         maxValue={systemStats ? +systemStats.ramTotal.toFixed(2) : 0}
                         unit=" MB"
                     />
                     <StatCard
+                        className="lg:order-4"
                         icon={HardDrive}
                         label="Storage"
+                        href="/storage"
                         value={systemStats ? +systemStats.storageUsed.toFixed(2) : 0}
                         maxValue={systemStats ? +systemStats.storageTotal.toFixed(2) : 0}
                         unit=" GB"

@@ -49,10 +49,10 @@ export default function Page() {
         <div className="flex h-full w-full flex-col space-y-2 overflow-hidden p-2">
             <StatCard
                 icon={HardDrive}
-                label="Storage (current)"
+                label="Storage"
                 value={storageStats ? storageStats[storageStats.length - 1].storageUsed : 0}
                 maxValue={storageStats ? storageStats[storageStats.length - 1].storageTotal : 0}
-                unit={storageStats ? storageStats[storageStats.length - 1].storageUnit : ""}
+                unit={storageStats ? storageStats[storageStats.length - 1].storageUnit : "GB"}
             />
             <div className="flex w-full flex-1 flex-col overflow-hidden rounded-md border shadow-sm">
                 <h3 className="flex-shrink-0 p-4 text-xl font-semibold">Storage usage</h3>

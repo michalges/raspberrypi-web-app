@@ -2,17 +2,15 @@
 
 import { StatCard } from "@/components/stat-card";
 import { API_URL, FETCH_INTERVAL } from "@/lib/constants";
-import type { SystemStats } from "@/lib/types";
+import type { DeviceInfo, SystemStats } from "@/lib/types";
 import { Cpu, HardDrive, MemoryStick, Thermometer } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export interface DeviceInfo {
-    revision: string | null;
-    model: string;
-}
-
 export default function Page() {
-    const [deviceInfo, setDeviceInfo] = useState<DeviceInfo | null>(null);
+    const [deviceInfo, setDeviceInfo] = useState<DeviceInfo | null>({
+        model: "Loading...",
+        revision: null,
+    });
     const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
 
     useEffect(() => {

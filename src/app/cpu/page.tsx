@@ -42,7 +42,7 @@ export default function Page() {
         <div className="flex h-full w-full flex-col space-y-2 overflow-hidden p-2">
             <StatCard
                 icon={Cpu}
-                label="CPU usage (total)"
+                label="CPU usage"
                 value={cpuStats ? cpuStats[cpuStats.length - 1].cpuUsage : 0}
                 unit="%"
             />

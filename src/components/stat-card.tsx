@@ -8,7 +8,7 @@ export function StatCard({
     label,
     value,
     maxValue,
-    unit,
+    unit = "",
     href,
     className = "",
 }: {
@@ -36,7 +36,7 @@ export function StatCard({
                     <span className="text-2xl">
                         {value} {unit}
                     </span>
-                    {maxValue && (
+                    {maxValue != null && (
                         <span className="text-muted-foreground/50 text-sm">
                             {" / "}
                             {maxValue} {unit}

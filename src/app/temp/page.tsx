@@ -42,7 +42,7 @@ export default function Page() {
         <div className="flex h-full w-full flex-col space-y-2 overflow-hidden p-2">
             <StatCard
                 icon={Thermometer}
-                label="Temperature (current)"
+                label="Temperature"
                 value={tempStats && tempStats.length > 0 ? tempStats[tempStats.length - 1].temp : 0}
                 unit="°C"
             />

@@ -16,25 +16,15 @@ export default function Page() {
     useEffect(() => {
         async function fetchSystemStats() {
             try {
-                const [cpuRes, tempRes, ramRes, storageRes] = await Promise.all([
-                    fetch(`${API_URL}/cpu`),
-                    fetch(`${API_URL}/temp`),
-                    fetch(`${API_URL}/ram`),
-                    fetch(`${API_URL}/storage`),
-                ]);
-                const [cpuData, tempData, ramData, storageData] = await Promise.all([
-                    cpuRes.json(),
-                    tempRes.json(),
-                    ramRes.json(),
-                    storageRes.json(),
-                ]);
+                const res = await fetch(`${API_URL}/system-stats`);
+                const data = await res.json();
                 setSystemStats({
-                    cpuUsage: cpuData.cpu_usage ?? 0,
-                    temperature: tempData.temp ?? 0,
-                    ramUsed: ramData.ram_used ?? 0,
-                    ramTotal: ramData.ram_total ?? 0,
-                    storageUsed: storageData.storage_used ?? 0,
-                    storageTotal: storageData.storage_total ?? 0,
+                    cpuUsage: data.cpu_usage ?? 0,
+                    temperature: data.temp ?? 0,
+                    ramUsed: data.ram_used ?? 0,
+                    ramTotal: data.ram_total ?? 0,
+                    storageUsed: data.storage_used ?? 0,
+                    storageTotal: data.storage_total ?? 0,
                 });
             } catch {
                 setSystemStats(null);
@@ -53,7 +43,7 @@ export default function Page() {
                 const data = await res.json();
                 setDeviceInfo({
                     revision: data.revision ?? null,
-                    model: data.model ?? "Nieznany model",
+                    model: data.model ?? "Unknown model",
                 });
             } catch {
                 setDeviceInfo(null);

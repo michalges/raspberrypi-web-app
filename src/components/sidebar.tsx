@@ -1,11 +1,9 @@
 "use client";
 
-import { Button } from "./ui/button";
+import { SidebarButton } from "./sidebar-button";
 import { useSidebarContext } from "@/contexts/sidebar-context";
 import { API_URL } from "@/lib/constants";
 import { Cpu, HardDrive, MemoryStick, Thermometer, LayoutGrid } from "lucide-react";
-import { LucideIcon } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -91,37 +89,5 @@ export function Sidebar() {
                 </div>
             </aside>
         </>
-    );
-}
-
-function SidebarButton({
-    label,
-    pathname,
-    currentPath,
-    icon: Icon,
-    toggle,
-}: {
-    label: string;
-    pathname: string;
-    currentPath: string;
-    icon: LucideIcon;
-    toggle: () => void;
-}) {
-    return (
-        <Button
-            asChild
-            className="w-full justify-start gap-2"
-            variant={pathname === currentPath ? "secondary" : "ghost"}
-            onClick={() => {
-                if (window.innerWidth < 1024) {
-                    toggle();
-                }
-            }}
-        >
-            <Link href={currentPath}>
-                <Icon className="h-4 w-4" />
-                {label}
-            </Link>
-        </Button>
     );
 }

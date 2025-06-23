@@ -14,21 +14,8 @@ export default function Page() {
         async function fetchStorageStats() {
             try {
                 const res = await fetch(`${API_URL}/storage/history`);
-                const data = await res.json();
-                const mappedData: StorageStats[] = data.map(
-                    (item: {
-                        timestamp: string;
-                        storage_used: number;
-                        storage_total: number;
-                        storage_unit: string;
-                    }) => ({
-                        timestamp: item.timestamp,
-                        storageUsed: item.storage_used,
-                        storageTotal: item.storage_total,
-                        storageUnit: item.storage_unit,
-                    }),
-                );
-                setStorageStats(mappedData);
+                const data: StorageStats[] = await res.json();
+                setStorageStats(data);
             } catch {
                 setStorageStats(null);
             }

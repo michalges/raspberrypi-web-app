@@ -17,15 +17,8 @@ export default function Page() {
         async function fetchSystemStats() {
             try {
                 const res = await fetch(`${API_URL}/system-stats`);
-                const data = await res.json();
-                setSystemStats({
-                    cpuUsage: data.cpu_usage ?? 0,
-                    temperature: data.temp ?? 0,
-                    ramUsed: data.ram_used ?? 0,
-                    ramTotal: data.ram_total ?? 0,
-                    storageUsed: data.storage_used ?? 0,
-                    storageTotal: data.storage_total ?? 0,
-                });
+                const data: SystemStats = await res.json();
+                setSystemStats(data);
             } catch {
                 setSystemStats(null);
             }
@@ -81,7 +74,7 @@ export default function Page() {
                         icon={Thermometer}
                         label="Temperature"
                         href="/temp"
-                        value={systemStats ? +systemStats.temperature.toFixed(2) : 0}
+                        value={systemStats ? +systemStats.temp.toFixed(2) : 0}
                         unit="°C"
                     />
                     <StatCard

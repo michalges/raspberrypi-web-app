@@ -14,21 +14,8 @@ export default function Page() {
         async function fetchRamStats() {
             try {
                 const res = await fetch(`${API_URL}/ram/history`);
-                const data = await res.json();
-                const mappedData: RamStats[] = data.map(
-                    (item: {
-                        timestamp: string;
-                        ram_used: number;
-                        ram_total: number;
-                        ram_unit: string;
-                    }) => ({
-                        timestamp: item.timestamp,
-                        ramUsage: item.ram_used,
-                        ramTotal: item.ram_total,
-                        ramUnit: item.ram_unit,
-                    }),
-                );
-                setRamStats(mappedData);
+                const data: RamStats[] = await res.json();
+                setRamStats(data);
             } catch {
                 setRamStats(null);
             }
@@ -42,7 +29,7 @@ export default function Page() {
     const chartData: ChartData[] =
         ramStats?.map((dataPoint) => ({
             timestamp: dataPoint.timestamp,
-            value: dataPoint.ramUsage,
+            value: dataPoint.ramUsed,
         })) || [];
 
     return (
@@ -50,7 +37,7 @@ export default function Page() {
             <StatCard
                 icon={MemoryStick}
                 label="RAM"
-                value={ramStats ? ramStats[ramStats.length - 1].ramUsage : 0}
+                value={ramStats ? ramStats[ramStats.length - 1].ramUsed : 0}
                 maxValue={ramStats ? ramStats[ramStats.length - 1].ramTotal : 0}
                 unit={ramStats ? ramStats[ramStats.length - 1].ramUnit : "MB"}
             />

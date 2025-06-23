@@ -1,6 +1,6 @@
 export interface SystemStats {
     cpuUsage: number;
-    temperature: number;
+    temp: number;
     ramUsed: number;
     ramTotal: number;
     storageUsed: number;
@@ -19,7 +19,7 @@ export interface TempStats {
 
 export interface RamStats {
     timestamp: number;
-    ramUsage: number;
+    ramUsed: number;
     ramTotal: number;
     ramAvailable: number;
     ramPercentUsed: number;

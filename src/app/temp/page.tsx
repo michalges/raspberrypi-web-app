@@ -14,14 +14,8 @@ export default function Page() {
         async function fetchTempStats() {
             try {
                 const res = await fetch(`${API_URL}/temp/history`);
-                const data = await res.json();
-                const mappedData: TempStats[] = data.map(
-                    (item: { timestamp: string; temp: number }) => ({
-                        timestamp: item.timestamp,
-                        temp: item.temp,
-                    }),
-                );
-                setTempStats(mappedData);
+                const data: TempStats[] = await res.json();
+                setTempStats(data);
             } catch {
                 setTempStats(null);
             }

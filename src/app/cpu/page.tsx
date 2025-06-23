@@ -14,14 +14,8 @@ export default function Page() {
         async function fetchCpuStats() {
             try {
                 const res = await fetch(`${API_URL}/cpu/history`);
-                const data = await res.json();
-                const mappedData: CpuStats[] = data.map(
-                    (item: { timestamp: string; cpu_usage: number }) => ({
-                        timestamp: item.timestamp,
-                        cpuUsage: item.cpu_usage,
-                    }),
-                );
-                setCpuStats(mappedData);
+                const data: CpuStats[] = await res.json();
+                setCpuStats(data);
             } catch {
                 setCpuStats(null);
             }

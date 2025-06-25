@@ -66,7 +66,7 @@ export default function Page() {
                         icon={Cpu}
                         label="CPU usage"
                         href="/cpu"
-                        value={systemStats ? +systemStats.cpuUsage.toFixed(2) : 0}
+                        value={systemStats ? +systemStats.cpuUsage : 0}
                         unit="%"
                     />
                     <StatCard
@@ -74,7 +74,7 @@ export default function Page() {
                         icon={Thermometer}
                         label="Temperature"
                         href="/temp"
-                        value={systemStats ? +systemStats.temp.toFixed(2) : 0}
+                        value={systemStats ? +systemStats.temp : 0}
                         unit="°C"
                     />
                     <StatCard
@@ -82,8 +82,8 @@ export default function Page() {
                         icon={MemoryStick}
                         label="RAM"
                         href="/ram"
-                        value={systemStats ? +systemStats.ramUsed.toFixed(2) : 0}
-                        maxValue={systemStats ? +systemStats.ramTotal.toFixed(2) : 0}
+                        value={systemStats ? +systemStats.ramUsed : 0}
+                        maxValue={systemStats ? +systemStats.ramTotal : 0}
                         unit="MB"
                     />
                     <StatCard
@@ -91,8 +91,8 @@ export default function Page() {
                         icon={HardDrive}
                         label="Storage"
                         href="/storage"
-                        value={systemStats ? +systemStats.storageUsed.toFixed(2) : 0}
-                        maxValue={systemStats ? +systemStats.storageTotal.toFixed(2) : 0}
+                        value={systemStats ? +systemStats.storageUsed : 0}
+                        maxValue={systemStats ? +systemStats.storageTotal : 0}
                         unit="GB"
                     />
                 </div>

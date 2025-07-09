@@ -19,7 +19,7 @@ This app is designed to work alongside the [hardware info API](https://github.co
 
 ## How to Run
 
-> Note: To run the aplication you also need [hardware info API](https://github.com/michalges/raspberrypi-hardware-info-api), which provides endpoints with system metrics.
+> Note: To run the aplication, you also need [hardware info API](https://github.com/michalges/raspberrypi-hardware-info-api), which provides endpoints with system metrics.
 
 1. Clone the repository:
 

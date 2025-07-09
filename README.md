@@ -30,6 +30,10 @@ This app is designed to work alongside the [hardware info API](https://github.co
 
 2. Run the Docker script:
 
+    ```bash
+    ./docker.sh
+    ```
+
     This script builds and runs the web app in a Docker container. It also ensures the app will automatically restart and keep running on each boot.
 
 3. Create `.env` file

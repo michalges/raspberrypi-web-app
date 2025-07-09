@@ -4,6 +4,8 @@ A lightweight web application designed to run on your Raspberry Pi, providing re
 
 This app is designed to work alongside the [hardware info API](https://github.com/michalges/raspberrypi-hardware-info-api), which provides the system metrics.
 
+![pc-screenshot](pc-screenshot.png)
+
 ## Used Technologies
 
 - Next.js

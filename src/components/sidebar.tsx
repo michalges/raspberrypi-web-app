@@ -3,7 +3,8 @@
 import { SidebarButton } from "./sidebar-button";
 import { useSidebarContext } from "@/contexts/sidebar-context";
 import { API_URL } from "@/lib/constants";
-import { Cpu, HardDrive, MemoryStick, Thermometer, LayoutGrid } from "lucide-react";
+import { Cpu, HardDrive, MemoryStick, Thermometer, LayoutGrid, Link2, Github } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -82,9 +83,24 @@ export function Sidebar() {
                     toggle={toggle}
                 />
                 <div className="flex-grow"></div>
-                <div className="w-full p-2">
-                    <span className="text-muted-foreground text-xs whitespace-nowrap">
-                        Using data from: {API_URL}
+                <div className="w-full space-y-2 p-2">
+                    <Link
+                        href="https://github.com/michalges/raspberrypi-web-app"
+                        target="_blank"
+                        className="text-muted-foreground flex flex-row gap-x-1 text-xs whitespace-nowrap underline"
+                    >
+                        <Github className="h-4 w-4" />
+                        View project on GitHub
+                    </Link>
+                    <span className="text-muted-foreground flex flex-row gap-x-1 text-xs whitespace-nowrap">
+                        Using data from:
+                        <Link
+                            href={API_URL}
+                            target="_blank"
+                            className="text-muted-foreground flex flex-row gap-x-1 text-xs whitespace-nowrap underline"
+                        >
+                            {API_URL}
+                        </Link>
                     </span>
                 </div>
             </aside>
